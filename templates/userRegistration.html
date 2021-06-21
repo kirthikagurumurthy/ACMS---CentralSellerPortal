@@ -1,0 +1,298 @@
+{% extends "layout.html" %}
+
+{% block title %}User Registration{% endblock %}
+
+{% block header %}
+<style>
+  #Heading {
+    display: flex;
+    flex-wrap: wrap;
+    filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.161));
+    position: relative;
+    left: 50px;
+    top: 5px;
+    overflow: visible;
+    text-align: left;
+    font-family: Helvetica Neue;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    color: rgba(229,133,38,0.827);
+  }
+  #Subhead {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+		left: 50px;
+		top: 20px;
+		overflow: visible;
+		width: 599px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Arial;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 15px;
+		color: rgba(1,10,18,0.969);
+	}
+	#Company_Business_name {
+    position: relative;
+		left: 50px;
+		top: 30px;
+		overflow: visible;
+		width: 339px;
+		height: 36px;
+		text-align: left;
+		font-family: Arial;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 15px;
+		color: rgba(52,69,83,1);
+	}
+  #Input_Field {
+    position: relative;
+    width: 400px;
+    height: 65px;
+    left: 50px;
+    top: 30px;
+    overflow: visible;
+  }
+  .Radio_Button {
+		position: relative;
+		width: 500px;
+		height: 40px;
+		left: 50px;
+		top: 30px;
+		overflow: visible;
+	}
+  #hide{}
+  #haveGST{}
+  #Cont {
+		position: relative;
+		width: 120px;
+		height: 40px;
+		left: 50px;
+		top: 20px;
+		overflow: visible;
+	}
+
+  input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  font-size:15px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  }
+
+  button {
+  background-color: #000000;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  font-family: Helvetica Neue;
+  font-size: 15px;
+  letter-spacing: 2px;
+  }
+
+  .container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.container input { /* Hide the browser's default radio button */
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+.checkmark { /* Create a custom radio button */
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+.container:hover input ~ .checkmark { /* On mouse-over, add a grey background color */
+  background-color: #ccc;
+}
+.container input:checked ~ .checkmark { /* When the radio button is checked, add a blue background */
+  background-color: #000000;
+}
+.checkmark:after { /* Create the indicator (the dot/circle - hidden when not checked) */
+  content: "";
+  position: absolute;
+  display: none;
+}
+.container input:checked ~ .checkmark:after { /* Show the indicator (dot/circle) when checked */
+  display: block;
+}
+.container .checkmark:after { /* Style the indicator (dot/circle) */
+  top: 6px;
+  left: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+</style>
+<div class="navbar-brand">
+  <a class="navbar-item" href="#" style="color: white">
+    <img src="/images/azlogo.png" alt="Amazon">
+  </a>
+  <span class="navbar-burger" data-target="navMenu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </span>
+</div>
+<div id="navMenu" class="navbar-menu">
+  <div class="navbar-start">
+    <a href="/" class="navbar-item">Home</a>
+    <a href="#products" class="navbar-item">Products</a>
+  </div>
+  <div class="navbar-end">
+    <div class="navbar-item has-dropdown is-hoverable">
+      <a class="navbar-link">{{firstName}}</a>
+      <div class="navbar-dropdown">
+        <a href="/account/profile" class="navbar-item">Profile</a>
+        <a class="navbar-item">Report bug</a>
+        <a href="/logout" class="navbar-item">Sign Out</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block body %}
+<ol class="progtrckr" data-progtrckr-steps="5">
+    <li class="progtrckr-todo">Company details</li>
+    <li class="progtrckr-todo">Tax Details</li>
+    <li class="progtrckr-todo">Product Details</li>
+    <li class="progtrckr-todo">Account details</li>
+    <li class="progtrckr-todo">Sites</li>
+</ol>
+
+<div class="columns">
+  <div class="column is-half">
+    <div id="Heading">
+      <span>Register and Start Selling</span>
+    </div>
+    <div id="Subhead">
+      <span>Enter Details Below To Continue Registration</span>
+    </div>
+    <div id="Company_Business_name">
+      <span>Company/Business name</span>
+    </div>
+    <form action="/registration" method="POST">
+      <div id="Input_Field">
+        <input type="text" placeholder="company name" name="cname">
+      </div>
+    </form>
+    <div class="Radio_Button">
+      <label class="container">
+        <input type="radio" name="radio">
+        <span class="checkmark"></span>
+        <label for="radio" style="font-size: 15px;">I have read and i agree to the terms and conditions</label>
+      </label>
+    </div>
+    <div id="Company_Business_name">
+      <span>Give address of your company</span>
+    </div>
+    <form action="" method="POST">
+      <div id="Input_Field">
+        <input type="text" placeholder="building, area, city, state" name="adress">
+      </div>
+    </form>
+  </div>
+  <div class="column">
+    <div id="Heading">
+      <span>Update your Tax details</span>
+    </div>
+    <div class="Radio_Button">
+      <label class="container">
+        <input  id="haveGST" type="radio" onclick="javascript:yesnoCheck();" name="radio">
+        <span class="checkmark"></span>
+        <label for="radio" style="font-size: 15px;">I have GST number</label>
+      </label>
+    </div>
+    <div id="hide" style="display:none">
+      <div id="Company_Business_name">
+        <span>GST Number</span>
+      </div>
+      <form action="" method="POST">
+        <div id="Input_Field">
+          <input type="text" placeholder="building, area, city, state" name="adress">
+        </div>
+      </form>
+      <div id="Company_Business_name">
+        <span>PAN Number</span>
+      </div>
+      <form action="" method="POST">
+        <div id="Input_Field">
+          <input type="text" placeholder="building, area, city, state" name="adress">
+        </div>
+      </form>
+      <div class="Radio_Button">
+        <input type="checkbox" name="other">
+        <label for="other">I will fill later</label>
+      </div>
+    </div>
+    <div class="Radio_Button">
+      <label class="container">
+        <input type="radio" name="radio">
+        <span class="checkmark"></span>
+        <label for="radio" style="font-size: 15px;">I have never Registered for GST</label>
+      </label>
+    </div>
+  </div>
+</div>
+<div id="Cont">
+  <a href="/product">
+    <button type="submit">Continue</button>
+  </a>
+</div>
+{% endblock %}
+
+{% block footer %}
+<div class="navbar-item">
+  <div class="container has-text-centered has-text-white">
+    <div class="columns" style= "min-height:50px">
+      <div class="column" style="color:white; font-size:15px">
+          <h1>LOGO</h1>
+      </div>
+      <div class="column">
+        <a href="#" style="color:white; font-size:15px">Link</a>
+      </div>
+      <div class="column">
+        <a href="#" style="color:white; font-size:15px">Link</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+  function yesnoCheck() {
+      if (document.getElementById('haveGST').checked) {
+          document.getElementById('hide').style.display = 'block';
+      } else {
+          document.getElementById('hide').style.display = 'none';
+      }
+    }
+</script>
+{% endblock %}
